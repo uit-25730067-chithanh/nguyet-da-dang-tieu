@@ -16,7 +16,9 @@ export class PerfManager {
   private isContextLost = false;
 
   constructor() {
-    this.fpsDisplayElement = document.getElementById('fps-counter');
+    if (typeof document !== 'undefined') {
+      this.fpsDisplayElement = document.getElementById('fps-counter');
+    }
   }
 
   public update(): void {
