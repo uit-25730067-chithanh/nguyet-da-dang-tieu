@@ -13,15 +13,15 @@
 ![Nguyệt Dạ Đăng Tiêu — The Moonlit Lantern Sanctuary](./docs/preview.png)
 *Fireflies dancing alongside lotus lanterns and glowing star lanterns, illuminated by candle halos and the shimmering reflection of the autumn full moon.*
 
-🔗 **Live Interactive Experience:** [https://uit-25730067-chithanh.github.io/nguyet-da-dang-tieu/](https://uit-25730067-chithanh.github.io/nguyet-da-dang-tieu/)
+**Live Interactive Experience:** [https://uit-25730067-chithanh.github.io/nguyet-da-dang-tieu/](https://uit-25730067-chithanh.github.io/nguyet-da-dang-tieu/)
 
 ---
 
-## 📖 The Origin: An Experiment in Agentic Engineering
+## The Origin: An Experiment in Agentic Engineering
 
 > *"Conceived on the evening of the Mid-Autumn Festival from a single prompt, driven by spontaneous curiosity."*
 
-This project was built to explore a simple question: **What can a modern autonomous AI agent accomplish in a single uninterrupted session when granted end-to-end creative and technical freedom?**
+This project was built to explore a straightforward question: **What can a modern autonomous AI agent accomplish in a single uninterrupted session when granted end-to-end creative and technical freedom?**
 
 Starting with an initial creative prompt on Mid-Autumn night, the author adopted an approval-driven posture—reviewing and accepting architectural choices, module plans, and design proposals drafted by the agent. Across this session, the system autonomously:
 1. Researched and conceptualized three distinct creative directions, landing on a 3D lantern-floating sanctuary.
@@ -34,7 +34,7 @@ There is no formal academic thesis, coursework syllabus, or commercial product a
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 - **The River of Wishes (Hoa Đăng Bồng Bềnh):** Watch multi-layered lotus lanterns (*Hoa Đăng*) and traditional red star lanterns (*Đèn Ông Sao*) drift smoothly down a tranquil river with harmonic sinusoidal bobbing and gentle angular oscillation.
 - **Interactive Raycasting & Community Wishes:** Hover or click on any floating lantern to reveal heartfelt wishes, blessings, and poems left by fellow night-watchers.
@@ -46,40 +46,51 @@ There is no formal academic thesis, coursework syllabus, or commercial product a
 
 ---
 
-## 🏛️ System Architecture
+## System Architecture
 
 ```mermaid
 flowchart TD
-    subgraph UI ["User Interface & Accessibility"]
-        Dock["Interactive Control Dock"]
-        Modal["Wish Dialog Modal"]
-        Popover["Lantern Wish Popover (Raycasting)"]
-        A11y["Keyboard Navigation & Reduced Motion"]
+    subgraph ClientUI [User Interface and Controls]
+        Dock[Control Dock]
+        WishModal[Wish Submission Dialog]
+        Raycast[Interactive Raycaster]
     end
 
-    subgraph GraphicsEngine ["Multi-Tier Graphics Pipeline"]
-        Detect{"WebGL 2.0 Supported?"}
-        ThreeScene["Three.js 3D Engine<br/>• Custom Moon Mesh & Atmospheric Glow Shader<br/>• River Mesh & Fresnel Specular Water Shader<br/>• Firefly & Starlight Particle Systems"]
-        FallbackScene["2.5D Canvas Fallback Engine<br/>(Graceful degradation for low-power devices)"]
-        Perf["Performance Manager<br/>(Adaptive LOD & Quality Tiering)"]
+    subgraph Simulation [State and Physics Simulation]
+        Store[Wish Store]
+        Flow[Buoyancy and River Drift]
     end
 
-    subgraph PhysicsAudio ["Simulation & Procedural Audio"]
-        Physics["Flow Simulation<br/>(Sinusoidal Buoyancy & Drift Dynamics)"]
-        Audio["Pentatonic Synthesizer (Web Audio API)<br/>• Vietnamese Pentatonic Scale (Hò, Xự, Xang, Xê, Cống)<br/>• Đàn Tranh Pluck (Fast Attack & Exponential Decay)<br/>• Bamboo Flute (Biquad Filter Resonance)<br/>• Ambient Delay Reverb Feedback Bus"]
+    subgraph AudioEngine [Procedural Web Audio Engine]
+        Synth[Audio Synthesizer]
+        Pentatonic[Vietnamese Pentatonic Tuning]
+        Reverb[Stereo Delay Network]
     end
 
-    UI --> GraphicsEngine
-    Detect -->|WebGL Available| ThreeScene
-    Detect -->|Context Lost / Unsupported| FallbackScene
-    ThreeScene <--> Physics
-    UI -->|Lantern Release / Inspection| Audio
-    Perf -.->|FPS Monitoring| ThreeScene
+    subgraph GraphicsPipeline [Multi-Tier Graphics Pipeline]
+        Detect{WebGL 2.0 Available?}
+        ThreeEngine[Three.js 3D Scene]
+        CanvasEngine[2.5D Canvas Fallback Engine]
+        PerfTier[Adaptive Performance Manager]
+    end
+
+    Dock --> WishModal
+    Dock --> Synth
+    Raycast --> Synth
+    WishModal --> Store
+    Store --> Flow
+    Flow --> ThreeEngine
+    Flow --> CanvasEngine
+    Detect -->|Supported| ThreeEngine
+    Detect -->|Fallback| CanvasEngine
+    PerfTier --> ThreeEngine
+    Synth --> Pentatonic
+    Synth --> Reverb
 ```
 
 ---
 
-## 🔬 Technical Deep Dive
+## Technical Deep Dive
 
 ### 1. Custom GLSL Shaders
 
@@ -109,7 +120,7 @@ flowchart TD
 
 ---
 
-## ⌨️ Controls & Keyboard Shortcuts
+## Controls and Keyboard Shortcuts
 
 | Shortcut | Action |
 | :---: | :--- |
@@ -121,7 +132,7 @@ flowchart TD
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -150,7 +161,7 @@ npm run build
 
 ---
 
-## 🧪 Automated Testing
+## Automated Testing
 
 The codebase maintains full test coverage with **Vitest**:
 
@@ -180,7 +191,7 @@ Test Files: 3 passed (3) | Tests: 14 passed (14)
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 nguyet-da-dang-tieu/
@@ -209,6 +220,6 @@ nguyet-da-dang-tieu/
 
 ---
 
-## 📄 License
+## License
 
-Distributed under the **MIT License**. Feel free to explore, learn from, fork, and celebrate the beauty of Vietnamese digital culture! 🌕🥮
+Distributed under the **MIT License**. Feel free to explore, learn from, fork, and celebrate the beauty of Vietnamese digital culture.
