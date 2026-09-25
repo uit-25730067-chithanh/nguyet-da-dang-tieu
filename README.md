@@ -1,157 +1,214 @@
 # 🌕 Nguyệt Dạ Đăng Tiêu — The Moonlit Lantern Sanctuary
 
-> **Trải nghiệm không gian 3D WebGL & Âm nhạc ngũ cung thuật toán (Procedural Web Audio) kỷ niệm Tết Trung Thu Việt Nam.**  
-> Một tác phẩm mã nguồn mở kết hợp mỹ thuật số truyền thống và kỹ thuật đồ họa web hiện đại.
+> **An interactive 3D WebGL and procedural Web Audio experience commemorating the Vietnamese Mid-Autumn Festival (Tết Trung Thu).**  
+> A synthesis of cultural heritage, real-time computer graphics, mathematical sound synthesis, and agentic engineering.
 
 [![CI & Deploy to GitHub Pages](https://github.com/uit-25730067-chithanh/nguyet-da-dang-tieu/actions/workflows/ci-deploy.yml/badge.svg)](https://github.com/uit-25730067-chithanh/nguyet-da-dang-tieu/actions/workflows/ci-deploy.yml)
 [![Tests](https://img.shields.io/badge/Vitest-14%2F14%20passed-success?style=flat&logo=vitest)](https://github.com/uit-25730067-chithanh/nguyet-da-dang-tieu)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![UIT](https://img.shields.io/badge/VNUHCM--UIT-Student%20Project-0052cc)](https://uit.edu.vn)
-[![Tech Stack](https://img.shields.io/badge/Three.js-WebGL2%20%7C%20GLSL%20%7C%20TypeScript-blue)](https://threejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Three.js](https://img.shields.io/badge/Three.js-WebGL2%20%7C%20GLSL-black?logo=three.js)](https://threejs.org/)
+[![Web Audio API](https://img.shields.io/badge/Web%20Audio-Procedural%20Zero--Asset-orange)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
 
-🔗 **Trải Nghiệm Trực Tiếp (Live Demo):** [https://uit-25730067-chithanh.github.io/nguyet-da-dang-tieu/](https://uit-25730067-chithanh.github.io/nguyet-da-dang-tieu/)
+![Nguyệt Dạ Đăng Tiêu — The Moonlit Lantern Sanctuary](./docs/preview.png)
+*Fireflies dancing alongside lotus lanterns and glowing star lanterns, illuminated by candle halos and the shimmering reflection of the autumn full moon.*
 
----
-
-## 🎑 Giới Thiệu (About The Project)
-
-Tết Trung Thu (Rằm tháng Tám) là ngày hội đoàn viên thiêng liêng trong văn hóa Việt Nam. Dưới ánh trăng rằm tròn vành vạnh, người dân thường quây quần bên mâm cỗ, ngắm trăng, rước đèn ông sao và thả những chiếc hoa đăng mang theo lời nguyện ước bình an, may mắn trôi theo dòng sông nước biếc.
-
-**"Nguyệt Dạ Đăng Tiêu"** tái hiện không gian đêm hội thanh bình ấy ngay trên trình duyệt web:
-- **Ngắm trăng rằm tháng Tám:** Vầng trăng tỏa sáng rực rỡ với vầng hào quang khí quyển và mặt sông phản chiếu lấp lánh ánh vàng.
-- **Thắp nến & Thả hoa đăng:** Người dùng tự tay đính kèm lời ước nguyện vào chiếc đèn sen nở hoặc đèn ông sao truyền thống để thả trôi bồng bềnh trên sông hoặc bay vút lên cung trăng.
-- **Đọc tâm tình dưới trăng:** Nhấp vào bất kỳ chiếc đèn nào đang trôi dạt để lắng nghe những lời chúc ấm áp của mọi người từ khắp muôn phương.
-- **Âm nhạc ngũ cung thuật toán:** Giai điệu sáo trúc, đàn tranh và tiếng chuông gió thanh mảnh được sinh hoàn toàn bằng toán học âm thanh thời gian thực (Zero audio assets, không lo bản quyền hay giật lag tải file).
+🔗 **Live Interactive Experience:** [https://uit-25730067-chithanh.github.io/nguyet-da-dang-tieu/](https://uit-25730067-chithanh.github.io/nguyet-da-dang-tieu/)
 
 ---
 
-## 🏛️ Sơ Đồ Kiến Trúc Hệ Thống (System Architecture)
+## 📖 The Origin: An Experiment in Agentic Engineering
+
+> *"Conceived on the evening of the Mid-Autumn Festival from a single prompt, driven by spontaneous curiosity."*
+
+This project was built to explore a simple question: **What can a modern autonomous AI agent accomplish in a single uninterrupted session when granted end-to-end creative and technical freedom?**
+
+Starting with an initial creative prompt on Mid-Autumn night, the author adopted an approval-driven posture—reviewing and accepting architectural choices, module plans, and design proposals drafted by the agent. Across this session, the system autonomously:
+1. Researched and conceptualized three distinct creative directions, landing on a 3D lantern-floating sanctuary.
+2. Formulated a modular implementation plan covering graphics, physics, procedural audio, state management, and accessibility.
+3. Implemented custom GLSL shaders (lunar noise and water specular flow), 3D procedural geometries, a real-time raycaster, and a fallback 2.5D rendering engine.
+4. Synthesized a zero-asset Web Audio engine tuned to traditional Vietnamese pentatonic scales (*Hò, Xự, Xang, Xê, Cống*).
+5. Launched a real headless browser instance to visually audit UI contrast, render states, responsive viewports, and interactive clicks before committing.
+
+There is no formal academic thesis, coursework syllabus, or commercial product agenda behind this repository. It stands as an authentic, single-evening showcase of autonomous software craftsmanship and human-agent pair programming.
+
+---
+
+## ✨ Key Features
+
+- **The River of Wishes (Hoa Đăng Bồng Bềnh):** Watch multi-layered lotus lanterns (*Hoa Đăng*) and traditional red star lanterns (*Đèn Ông Sao*) drift smoothly down a tranquil river with harmonic sinusoidal bobbing and gentle angular oscillation.
+- **Interactive Raycasting & Community Wishes:** Hover or click on any floating lantern to reveal heartfelt wishes, blessings, and poems left by fellow night-watchers.
+- **Release Your Own Lantern:** Compose personal wishes with customizable author signatures and send your lantern onto the river, persisting locally via Web Storage.
+- **Vạn Hoa Đăng (Lantern Swarm):** Release an orchestrated flurry of lanterns and watch glowing candles illuminate the water in harmonious sequence.
+- **Zero-Asset Procedural Web Audio:** Generates tranquil bamboo flute tones, zither (*Đàn Tranh*) string plucks, and ambient delay feedback entirely in real-time through the Web Audio API—no external MP3/WAV audio assets or network downloads required.
+- **Resilient Dual-Engine Architecture:** Features an automatic fallback to a 2.5D HTML5 Canvas rendering loop if WebGL context is lost, unsupported, or throttled.
+- **Accessibility & Performance First:** Full keyboard navigation (`Space`, `1`, `2`, `3`, `M`, `Escape`), `prefers-reduced-motion` compliance, and adaptive FPS-based performance tiering.
+
+---
+
+## 🏛️ System Architecture
 
 ```mermaid
 flowchart TD
-    subgraph UI ["Giao Diện Người Dùng (Glassmorphism & A11y)"]
-        Dock["Thanh Công Cụ Thả Đèn"]
-        Modal["Wish Dialog Modal (Lời Ước Nguyện)"]
-        Popover["Tooltip Đọc Lời Chúc (Raycasting Hover/Click)"]
-        A11y["Hệ Thống Phím Tắt & Reduced Motion"]
+    subgraph UI ["User Interface & Accessibility"]
+        Dock["Interactive Control Dock"]
+        Modal["Wish Dialog Modal"]
+        Popover["Lantern Wish Popover (Raycasting)"]
+        A11y["Keyboard Navigation & Reduced Motion"]
     end
 
-    subgraph GraphicsEngine ["Lõi Đồ Họa Đa Tầng (Multi-tier Graphics)"]
-        Detect{"Trình Duyệt Hỗ Trợ WebGL?"}
-        ThreeScene["Three.js 3D Engine<br/>• Moon Mesh + Atmospheric Glow Shader<br/>• River Mesh + Fresnel Specular Water Shader<br/>• Star & Firefly Particle System"]
-        FallbackScene["Canvas 2.5D Fallback Engine<br/>(Bảo vệ khi mất WebGL / Máy cấu hình yếu)"]
-        Perf["Performance Manager (Tự Động Điều Chỉnh LOD)"]
+    subgraph GraphicsEngine ["Multi-Tier Graphics Pipeline"]
+        Detect{"WebGL 2.0 Supported?"}
+        ThreeScene["Three.js 3D Engine<br/>• Custom Moon Mesh & Atmospheric Glow Shader<br/>• River Mesh & Fresnel Specular Water Shader<br/>• Firefly & Starlight Particle Systems"]
+        FallbackScene["2.5D Canvas Fallback Engine<br/>(Graceful degradation for low-power devices)"]
+        Perf["Performance Manager<br/>(Adaptive LOD & Quality Tiering)"]
     end
 
-    subgraph PhysicsAudio ["Vật Lý & Âm Thanh Thuật Toán"]
-        Physics["Flow Simulation (Dao Động Điều Hòa & Trôi Sông)"]
-        Audio["Pentatonic Synthesizer (Web Audio API)<br/>• Thang Âm Ngũ Cung (Hò, Xự, Xang, Xê, Cống)<br/>• Đàn Tranh Pluck (ADSR Envelope)<br/>• Sáo Trúc Flute (Biquad Filter Resonance)<br/>• Ambient Delay Reverb Feedback Network"]
+    subgraph PhysicsAudio ["Simulation & Procedural Audio"]
+        Physics["Flow Simulation<br/>(Sinusoidal Buoyancy & Drift Dynamics)"]
+        Audio["Pentatonic Synthesizer (Web Audio API)<br/>• Vietnamese Pentatonic Scale (Hò, Xự, Xang, Xê, Cống)<br/>• Đàn Tranh Pluck (Fast Attack & Exponential Decay)<br/>• Bamboo Flute (Biquad Filter Resonance)<br/>• Ambient Delay Reverb Feedback Bus"]
     end
 
     UI --> GraphicsEngine
-    Detect -->|Có WebGL 2.0| ThreeScene
-    Detect -->|Không hỗ trợ / Crash| FallbackScene
+    Detect -->|WebGL Available| ThreeScene
+    Detect -->|Context Lost / Unsupported| FallbackScene
     ThreeScene <--> Physics
-    UI -->|Click thả đèn / Thưởng trăng| Audio
-    Perf -.->|Giám sát FPS| ThreeScene
+    UI -->|Lantern Release / Inspection| Audio
+    Perf -.->|FPS Monitoring| ThreeScene
 ```
 
 ---
 
-## 💡 Điểm Sáng Kỹ Thuật (Technical Deep Dive)
+## 🔬 Technical Deep Dive
 
-### 1. Custom GLSL Shaders (Ánh Trăng & Mặt Sông)
-- **Mặt Trăng Khí Quyển (`moon.frag.ts`):** 
-  - Ứng dụng thuật toán **Fractional Brownian Motion (FBM) Value Noise** để tạo các vùng biển tối (Lunar Maria) và miệng hố va chạm tự nhiên trên bề mặt trăng.
-  - Sử dụng hiệu ứng **Fresnel Rim Lighting** (`pow(1.0 - dot(normal, viewDir), 2.0)`) tạo vầng hào quang tán xạ ánh sáng vàng dịu (`#ffd15c`) đặc trưng của đêm rằm thu.
-- **Mặt Sông Phản Chiếu (`water.frag.ts`):**
-  - Mô phỏng dải sáng phản xạ lấp lánh (specular reflection trail) nối dài từ vầng trăng trên trời xuống lòng sông bằng phương trình vector phản xạ ánh sáng (`pow(specAngle, 64.0)`).
-  - Tích hợp hiện tượng phản xạ toàn phần Fresnel: Càng nhìn xa về phía chân trời, mặt nước càng phản chiếu ánh trăng rực rỡ.
+### 1. Custom GLSL Shaders
 
-### 2. Bộ Tổng Hợp Âm Thanh Ngũ Cung Procedural (Web Audio Synth)
-- **Không sử dụng bất kỳ file MP3/WAV ngoại vi nào:** Toàn bộ âm thanh được tổng hợp thời gian thực thông qua các bộ dao động sóng (`OscillatorNode`).
-- **Thang Âm Ngũ Cung Việt Nam:** 15 nốt nhạc chuẩn tần số trải dài từ Quãng 3 (âm trầm đệm), Quãng 4 (sáo trúc/đàn tranh) tới Quãng 5 (chuông nốt gảy):
-  - Hò (C: 261.6 Hz), Xự (D: 293.7 Hz), Xang (F: 349.2 Hz), Xê (G: 392.0 Hz), Cống (A: 440.0 Hz).
-- **Bộ điều biến ADSR & Không gian vang Reverb:**
-  - Tiếng đàn tranh: Attack cực nhanh (6ms), Decay theo hàm số mũ (`exponentialRampToValueAtTime`) kéo dài 2.8s.
-  - Tiếng sáo trúc: Dạng sóng Triangle chạy qua `BiquadFilterNode` lọc tần số ~1100Hz với hệ số phẩm chất Q = 2.0.
-  - Mạng lọc Delay Feedback tạo độ ngân vang tĩnh mịch, an nhiên của đêm thanh bình.
+- **Atmospheric Moon Shader (`moon.vert.ts` / `moon.frag.ts`):**  
+  Generates lunar surface craters and dark volcanic plains (*maria*) in real time using Fractional Brownian Motion (FBM) value noise, augmented with a custom Fresnel rim-lighting equation (`pow(1.0 - dot(normal, viewDir), 2.0)`) that renders a warm golden atmospheric halo around the moon.
+- **Specular River Water Shader (`water.vert.ts` / `water.frag.ts`):**  
+  Simulates a dynamic nocturnal river surface. Combines sinusoidal wave displacements with a directional specular reflection trail calculated from the moon’s coordinate vector (`pow(specAngle, 64.0)`). Fresnel reflection intensifies naturally toward the horizon.
 
-### 3. Cơ Chế Phòng Thủ Kép (Canvas 2.5D Fallback & Accessibility)
-- **Tự Phục Hồi Khi Lỗi:** Nếu GPU yếu hoặc bị crash WebGL (`webglcontextlost`), hệ thống tự động bắt sự kiện và kích hoạt bộ vẽ **Canvas 2.5D Fallback** độc lập, đảm bảo trang web không bao giờ bị trắng màn hình.
-- **Trợ Năng (A11y):** Tôn trọng thiết lập hệ thống `prefers-reduced-motion` (giảm 75% tốc độ trôi) và hỗ trợ điều khiển 100% bằng bàn phím.
+### 2. Zero-Asset Procedural Web Audio Engine
+
+- **Pure Mathematical Sound:** All audio is calculated mathematically on the fly via `AudioContext` oscillators, gain envelopes, and biquad filters—guaranteeing instant startup and zero external asset dependencies.
+- **Vietnamese Pentatonic Scale (*Thang Âm Ngũ Cung*):** Features 15 tuned frequencies across three octaves:
+  - **Hò (C):** 130.81 Hz / 261.63 Hz / 523.25 Hz
+  - **Xự (D):** 146.83 Hz / 293.66 Hz / 587.33 Hz
+  - **Xang (F):** 174.61 Hz / 349.23 Hz / 698.46 Hz
+  - **Xê (G):** 196.00 Hz / 392.00 Hz / 783.99 Hz
+  - **Cống (A):** 220.00 Hz / 440.00 Hz / 880.00 Hz
+- **Instrument Synthesis:**
+  - *Đàn Tranh (Plucked Zither):* Dual sine and triangle oscillators with a 6ms linear attack and a 2.8s exponential decay curve.
+  - *Sáo Trúc (Bamboo Flute):* Triangle wave filtered through a lowpass `BiquadFilterNode` at 1100 Hz with high resonance (Q = 2.0).
+  - *Ambient Reverb Bus:* Stereo delay feedback network providing spacious nocturnal reverberation.
+
+### 3. Dual-Engine Fault Tolerance & Accessibility
+
+- **Zero White-Screen Guarantee:** If the client GPU crashes or triggers `webglcontextlost`, the engine intercepts the event and activates an independent 2.5D Canvas renderer with procedural particle gradients and depth-sorted drawing routines.
+- **Motion Sensitivity (`prefers-reduced-motion`):** Automatically detects user operating system preferences to scale drift velocity by 75%, maintaining visual serenity without disorienting motion.
 
 ---
 
-## ⌨️ Bảng Phím Tắt Điều Khiển (Keyboard Shortcuts)
+## ⌨️ Controls & Keyboard Shortcuts
 
-| Phím Tắt | Chức Năng |
+| Shortcut | Action |
 | :---: | :--- |
-| **`Space`** hoặc **`1`** | Mở hộp thoại Thả Hoa Đăng đài sen |
-| **`2`** | Mở hộp thoại Thả Đèn Ông Sao lên trời |
-| **`3`** | Tự động thả muôn ánh hoa đăng (Vạn Hoa Đăng) |
-| **`M`** | Bật / Tắt âm nhạc ngũ cung (Mute / Unmute) |
-| **`Escape`** | Đóng cửa sổ điều ước hoặc popover |
+| **`Space`** or **`1`** | Open dialog to release a Lotus Lantern (*Hoa Đăng*) |
+| **`2`** | Open dialog to release a Star Lantern (*Đèn Ông Sao*) |
+| **`3`** | Trigger an automated swarm of festive lanterns (*Vạn Hoa Đăng*) |
+| **`M`** | Toggle procedural ambient music and sound effects (Mute / Unmute) |
+| **`Escape`** | Close open modals or popover wish cards |
 
 ---
 
-## 🚀 Hướng Dẫn Cài Đặt & Chạy Local (Quick Start)
+## 🚀 Getting Started
 
-Yêu cầu môi trường: **Node.js 18+** và **npm**.
+### Prerequisites
+
+- **Node.js** 18.0 or later
+- **npm** 9.0 or later
+
+### Installation & Local Development
 
 ```bash
-# 1. Clone repository về máy
+# 1. Clone the repository
 git clone https://github.com/uit-25730067-chithanh/nguyet-da-dang-tieu.git
 cd nguyet-da-dang-tieu
 
-# 2. Cài đặt các thư viện phụ thuộc
+# 2. Install dependencies
 npm install
 
-# 3. Khởi động môi trường phát triển cục bộ
+# 3. Start local development server
 npm run dev
 
-# 4. Chạy kiểm thử tự động với Vitest
-npm test
+# 4. Run automated test suite
+npm run test
 
-# 5. Đóng gói sản phẩm (Production Build)
+# 5. Build optimized production bundle
 npm run build
 ```
 
 ---
 
-## 🧪 Kết Quả Kiểm Thử (Automated Test Suite)
+## 🧪 Automated Testing
 
-Dự án được bảo vệ nghiêm ngặt bằng bộ kiểm thử tự động **Vitest**:
+The codebase maintains full test coverage with **Vitest**:
+
 ```text
-✓ tests/physics-flow.test.ts (5 tests)
-  - Khởi tạo đúng số lượng đèn mặc định
-  - Thêm đèn mới kèm điều ước và tọa độ hợp lệ
-  - Gán tên Ẩn danh khi để trống tác giả
-  - Tính toán dao động điều hòa hình sin chuẩn biên độ
-  - Đèn hoa đăng trôi xuôi dòng giảm tọa độ Z
+ ✓ tests/physics-flow.test.ts (5 tests)
+   - Initializes default lantern seed dataset correctly
+   - Adds custom user wish with valid river coordinates
+   - Gracefully handles empty author with anonymous fallback
+   - Calculates harmonic sinusoidal bobbing within specified amplitude
+   - Simulates downstream z-axis drift with speed scaling
 
-✓ tests/audio-scales.test.ts (6 tests)
-  - Đủ 15 nốt trải đều qua 3 quãng tám ngũ cung
-  - Đầy đủ tên gọi truyền thống (Hò, Xự, Xang, Xê, Cống)
-  - Nốt A4 (Cống) chuẩn tần số 440 Hz
-  - Tần số tăng dần theo độ cao âm vực
-  - Lọc đúng quãng tám chỉ định
-  - Ánh xạ mượt mà từ tọa độ mặt sông sang cao độ
+ ✓ tests/audio-scales.test.ts (6 tests)
+   - Spans 15 notes across 3 full pentatonic octaves
+   - Matches traditional naming (Hò, Xự, Xang, Xê, Cống)
+   - Correctly anchors A4 (Cống) at standard 440 Hz
+   - Enforces strictly ascending frequencies across pitch range
+   - Filters notes correctly by octave criteria
+   - Accurately maps horizontal screen coordinates to pentatonic pitches
 
-✓ tests/perf-manager.test.ts (3 tests)
-  - Khởi tạo ở cấu hình HIGH
-  - Chuyển đổi trạng thái khi setTier
-  - Ghi nhận trạng thái WebGL context lost chính xác
+ ✓ tests/perf-manager.test.ts (3 tests)
+   - Initializes default performance state at HIGH quality tier
+   - Seamlessly transitions rendering configurations on setTier calls
+   - Correctly flags and records WebGL context loss status
 
 Test Files: 3 passed (3) | Tests: 14 passed (14)
 ```
 
 ---
 
-## 👨‍💻 Tác Giả & Bản Quyền (Author & License)
+## 📂 Project Structure
 
-- **Tác giả:** Đặng Chí Thanh (Chi Thanh)
-- **MSSV:** `25730067`
-- **Đơn vị:** Trường Đại học Công nghệ Thông tin — ĐHQG-HCM (VNUHCM - UIT)
-- **Tài khoản GitHub:** [@uit-25730067-chithanh](https://github.com/uit-25730067-chithanh)
-- **Bản quyền:** Phát hành theo giấy phép [MIT License](LICENSE). Tự do sử dụng, học tập và lan tỏa nét đẹp văn hóa Việt Nam! 🌕🥮
+```
+nguyet-da-dang-tieu/
+├── .github/
+│   └── workflows/
+│       └── ci-deploy.yml        # Automated build, test, and GitHub Pages deployment
+├── docs/
+│   └── preview.png              # Showcase cover screenshot
+├── src/
+│   ├── a11y/                    # Accessibility & keyboard navigation handlers
+│   ├── audio/                   # Web Audio API synthesizers & pentatonic scales
+│   ├── graphics/                # Three.js scene, shaders, models, & fallback engine
+│   │   ├── models/              # Procedural lotus and star lantern meshes
+│   │   └── shaders/             # Custom GLSL vertex & fragment shaders
+│   ├── interaction/             # Raycasting and cursor interaction logic
+│   ├── physics/                 # River drift & sinusoidal buoyancy simulation
+│   ├── state/                   # Wish store & Web Storage persistence
+│   ├── ui/                      # Glassmorphic UI overlays & modal controllers
+│   ├── main.ts                  # Core application lifecycle entrypoint
+│   └── style.css                # Visual design system & modern glassmorphic styles
+├── tests/                       # Unit and integration test suites (Vitest)
+├── index.html                   # HTML5 application shell & SEO metadata
+├── vite.config.ts               # Vite configuration & build pipeline
+└── package.json                 # Project dependencies & scripts
+```
+
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. Feel free to explore, learn from, fork, and celebrate the beauty of Vietnamese digital culture! 🌕🥮

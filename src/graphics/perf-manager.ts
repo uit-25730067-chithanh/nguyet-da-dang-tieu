@@ -1,6 +1,6 @@
 /**
- * Bộ Quản Lý Hiệu Năng & Cấu Hình Đồ Họa (Performance & Quality Manager)
- * Đảm bảo 60 FPS mượt mà và tự động hạ cấp cấu hình khi cần thiết.
+ * Performance and Quality Manager
+ * Monitors rendering frame rate and adapts quality tiers dynamically.
  */
 
 export type QualityTier = 'high' | 'medium' | 'low';

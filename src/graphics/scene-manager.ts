@@ -33,16 +33,11 @@ export class SceneManager {
     // 2. Camera setup
     const aspect = window.innerWidth / window.innerHeight;
     this.camera = new THREE.PerspectiveCamera(55, aspect, 0.1, 1000);
-    // Camera positioned looking down over the peaceful river towards the horizon and moon
     this.camera.position.set(0, 6.5, 24);
     this.camera.lookAt(0, 3.0, -40);
 
     // 3. Renderer setup
-    this.renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      powerPreference: 'high-performance',
-    });
+    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;

@@ -1,6 +1,6 @@
 /**
- * Bộ Tổng Hợp Âm Thanh Ngũ Cung Procedural (Web Audio Synthesizer)
- * Tự sinh tiếng đàn tranh, chuông gió và sáo trúc giữa đêm rằm.
+ * Procedural Pentatonic Web Audio Synthesizer
+ * Generates traditional plucked string, wind chime, and flute tones algorithmically.
  */
 
 export class PentatonicSynthesizer {
@@ -70,24 +70,24 @@ export class PentatonicSynthesizer {
   }
 
   /**
-   * Phát nốt gảy đàn tranh / chuông gió (Dan Tranh / Bell Pluck)
+   * Play Dan Tranh / Bell plucked note
    */
   public playPluck(frequency: number, volume = 0.5): void {
     if (!this.ctx || !this.masterGain || this.isMuted) return;
 
     const now = this.ctx.currentTime;
 
-    // Primary Sine Oscillator (Âm cơ bản tròn trịa)
+    // Primary Sine Oscillator (Warm fundamental tone)
     const osc1 = this.ctx.createOscillator();
     osc1.type = 'sine';
     osc1.frequency.setValueAtTime(frequency, now);
 
-    // Harmonic Triangle Oscillator (Họa âm vang nhẹ như dây đàn kim loại)
+    // Harmonic Triangle Oscillator (Metallic string shimmer)
     const osc2 = this.ctx.createOscillator();
     osc2.type = 'triangle';
     osc2.frequency.setValueAtTime(frequency * 2.0, now);
 
-    // Gain Envelope for Pluck (ADSR: Attack siêu nhanh, Decay hàm mũ)
+    // Gain Envelope for Pluck (ADSR: Ultra-fast attack, exponential decay)
     const noteGain = this.ctx.createGain();
     noteGain.gain.setValueAtTime(0.001, now);
     noteGain.gain.linearRampToValueAtTime(volume * 0.7, now + 0.006);
@@ -111,7 +111,7 @@ export class PentatonicSynthesizer {
   }
 
   /**
-   * Phát tiếng sáo trúc êm dịu (Bamboo Flute Tone)
+   * Play gentle bamboo flute tone
    */
   public playFluteTone(frequency: number, duration = 2.5, volume = 0.35): void {
     if (!this.ctx || !this.masterGain || this.isMuted) return;

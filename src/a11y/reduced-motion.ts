@@ -1,5 +1,5 @@
 /**
- * Hỗ Trợ Chế Độ Giảm Chuyển Động (Reduced Motion Accessibility)
+ * Reduced Motion Accessibility Support (prefers-reduced-motion)
  */
 
 export class ReducedMotionManager {

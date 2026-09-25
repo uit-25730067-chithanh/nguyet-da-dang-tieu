@@ -1,5 +1,5 @@
 /**
- * Bộ Chuyển Đổi Renderer (WebGL 3D <-> Canvas 2.5D Fallback)
+ * Renderer Capability Detector (WebGL 3D vs 2.5D Canvas Fallback)
  */
 
 export function isWebGLAvailable(): boolean {

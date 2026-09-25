@@ -1,5 +1,5 @@
 /**
- * Hỗ Trợ Điều Khiển Bằng Bàn Phím (Keyboard Navigation & Accessibility)
+ * Keyboard Navigation & Accessibility Support
  */
 
 export interface KeyboardActions {

@@ -1,9 +1,32 @@
 import * as THREE from 'three';
 
+// Shared radial glow texture for candle flames
+let sharedCandleAura: THREE.CanvasTexture | null = null;
+function getCandleAura(): THREE.CanvasTexture {
+  if (!sharedCandleAura) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      gradient.addColorStop(0.0, 'rgba(255, 255, 220, 1.0)');
+      gradient.addColorStop(0.25, 'rgba(255, 180, 50, 0.75)');
+      gradient.addColorStop(0.65, 'rgba(255, 100, 20, 0.2)');
+      gradient.addColorStop(1.0, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 64, 64);
+    }
+    sharedCandleAura = new THREE.CanvasTexture(canvas);
+    sharedCandleAura.needsUpdate = true;
+  }
+  return sharedCandleAura;
+}
+
 export function createLotusLanternMesh(): THREE.Group {
   const group = new THREE.Group();
 
-  // 1. Lotus Base / Leaves (Lá sen xanh sẫm làm đế nổi)
+  // 1. Lotus Base / Floating Leaves
   const leafGeo = new THREE.CylinderGeometry(1.2, 0.9, 0.08, 16);
   const leafMat = new THREE.MeshStandardMaterial({
     color: 0x1b4332,
@@ -14,7 +37,7 @@ export function createLotusLanternMesh(): THREE.Group {
   leafMesh.position.y = 0.02;
   group.add(leafMesh);
 
-  // 2. Lotus Petals (Cánh sen hồng phai xếp tầng)
+  // 2. Lotus Petals (Curved double layer)
   const petalCount = 8;
   const petalMat = new THREE.MeshStandardMaterial({
     color: 0xff85a1,
@@ -40,7 +63,7 @@ export function createLotusLanternMesh(): THREE.Group {
     group.add(petal);
   }
 
-  // Inner petal layer (Tầng cánh sen trong nhỏ hơn)
+  // Inner petal layer
   for (let i = 0; i < petalCount; i++) {
     const angle = ((i + 0.5) / petalCount) * Math.PI * 2;
     const innerPetal = new THREE.Mesh(petalGeo, petalMat);
@@ -52,7 +75,7 @@ export function createLotusLanternMesh(): THREE.Group {
     group.add(innerPetal);
   }
 
-  // 3. Candle (Ngọn nến hổ phách ở tâm)
+  // 3. Center Candle Body
   const candleGeo = new THREE.CylinderGeometry(0.12, 0.14, 0.5, 12);
   const candleMat = new THREE.MeshStandardMaterial({
     color: 0xfff3b0,
@@ -62,7 +85,7 @@ export function createLotusLanternMesh(): THREE.Group {
   candleMesh.position.y = 0.3;
   group.add(candleMesh);
 
-  // 4. Candle Flame (Ngọn lửa bập bùng)
+  // 4. Candle Flame
   const flameGeo = new THREE.ConeGeometry(0.1, 0.35, 8);
   const flameMat = new THREE.MeshBasicMaterial({
     color: 0xffe600,
@@ -72,30 +95,7 @@ export function createLotusLanternMesh(): THREE.Group {
   flameMesh.name = 'flame';
   group.add(flameMesh);
 
-// Shared radial glow texture for candle flames
-let sharedCandleAura: THREE.CanvasTexture | null = null;
-function getCandleAura(): THREE.CanvasTexture {
-  if (!sharedCandleAura) {
-    const canvas = document.createElement('canvas');
-    canvas.width = 64;
-    canvas.height = 64;
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      gradient.addColorStop(0.0, 'rgba(255, 255, 220, 1.0)');
-      gradient.addColorStop(0.25, 'rgba(255, 180, 50, 0.75)');
-      gradient.addColorStop(0.65, 'rgba(255, 100, 20, 0.2)');
-      gradient.addColorStop(1.0, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, 64, 64);
-    }
-    sharedCandleAura = new THREE.CanvasTexture(canvas);
-    sharedCandleAura.needsUpdate = true;
-  }
-  return sharedCandleAura;
-}
-
-  // 5. Warm candlelight glow aura (Sprite tỏa vầng hào quang ấm áp)
+  // 5. Warm Candlelight Glow Aura Sprite
   const auraMat = new THREE.SpriteMaterial({
     map: getCandleAura(),
     color: 0xffaa44,

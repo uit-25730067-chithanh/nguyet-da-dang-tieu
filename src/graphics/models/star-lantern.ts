@@ -1,5 +1,28 @@
 import * as THREE from 'three';
 
+// Shared radial glow texture for star lantern
+let sharedStarAura: THREE.CanvasTexture | null = null;
+function getStarAura(): THREE.CanvasTexture {
+  if (!sharedStarAura) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      gradient.addColorStop(0.0, 'rgba(255, 255, 200, 1.0)');
+      gradient.addColorStop(0.3, 'rgba(255, 200, 50, 0.8)');
+      gradient.addColorStop(0.7, 'rgba(255, 80, 20, 0.25)');
+      gradient.addColorStop(1.0, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 64, 64);
+    }
+    sharedStarAura = new THREE.CanvasTexture(canvas);
+    sharedStarAura.needsUpdate = true;
+  }
+  return sharedStarAura;
+}
+
 export function createStarLanternMesh(): THREE.Group {
   const group = new THREE.Group();
 
@@ -48,7 +71,7 @@ export function createStarLanternMesh(): THREE.Group {
   const starMesh = new THREE.Mesh(starGeo, starMat);
   group.add(starMesh);
 
-  // Outer bamboo ring (Vòng tròn nan tre truyền thống giữ khung sao)
+  // Outer bamboo ring frame
   const ringGeo = new THREE.TorusGeometry(0.85, 0.04, 8, 32);
   const ringMat = new THREE.MeshStandardMaterial({
     color: 0xd4a373,
@@ -66,29 +89,6 @@ export function createStarLanternMesh(): THREE.Group {
   coreMesh.name = 'flame';
   group.add(coreMesh);
 
-// Shared radial glow texture for star lantern
-let sharedStarAura: THREE.CanvasTexture | null = null;
-function getStarAura(): THREE.CanvasTexture {
-  if (!sharedStarAura) {
-    const canvas = document.createElement('canvas');
-    canvas.width = 64;
-    canvas.height = 64;
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      gradient.addColorStop(0.0, 'rgba(255, 255, 200, 1.0)');
-      gradient.addColorStop(0.3, 'rgba(255, 200, 50, 0.8)');
-      gradient.addColorStop(0.7, 'rgba(255, 80, 20, 0.25)');
-      gradient.addColorStop(1.0, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, 64, 64);
-    }
-    sharedStarAura = new THREE.CanvasTexture(canvas);
-    sharedStarAura.needsUpdate = true;
-  }
-  return sharedStarAura;
-}
-
   // Glowing aura sprite in center of star
   const auraMat = new THREE.SpriteMaterial({
     map: getStarAura(),
@@ -103,7 +103,7 @@ function getStarAura(): THREE.CanvasTexture {
   auraSprite.position.set(0, 0, 0.05);
   group.add(auraSprite);
 
-  // Bamboo stem handle (Cán tre nhỏ)
+  // Bamboo stem handle
   const handleGeo = new THREE.CylinderGeometry(0.04, 0.04, 1.8, 8);
   const handleMesh = new THREE.Mesh(handleGeo, ringMat);
   handleMesh.position.y = -1.2;

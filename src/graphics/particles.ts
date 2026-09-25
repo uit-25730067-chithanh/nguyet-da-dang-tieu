@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 /**
- * Tạo CanvasTexture tròn có gradient phát sáng từ tâm ra ngoài (không bị viền vuông)
+ * Generate a soft circular glow CanvasTexture with smooth radial gradient
  */
 function createCircularGlowTexture(
   colorCore: string,
@@ -46,7 +46,7 @@ export class ParticleSystem {
   constructor(starCount = 1500, fireflyCount = 200) {
     this.fireflyCount = fireflyCount;
 
-    // 1. Sky Stars Setup với texture tròn phát sáng mềm
+    // 1. Sky Stars Setup with soft glowing point texture
     const starGeometry = new THREE.BufferGeometry();
     const starPos = new Float32Array(starCount * 3);
     const starColors = new Float32Array(starCount * 3);
@@ -54,7 +54,7 @@ export class ParticleSystem {
     for (let i = 0; i < starCount; i++) {
       const idx = i * 3;
       const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(Math.random() * 0.85 + 0.15); // Nửa bán cầu trên
+      const phi = Math.acos(Math.random() * 0.85 + 0.15); // Upper hemisphere
       const radius = 240 + Math.random() * 80;
 
       starPos[idx] = radius * Math.sin(phi) * Math.cos(theta);
@@ -63,11 +63,11 @@ export class ParticleSystem {
 
       const colorType = Math.random();
       if (colorType > 0.75) {
-        starColors[idx] = 1.0; starColors[idx + 1] = 0.92; starColors[idx + 2] = 0.65; // Vàng ấm
+        starColors[idx] = 1.0; starColors[idx + 1] = 0.92; starColors[idx + 2] = 0.65; // Warm amber
       } else if (colorType < 0.2) {
-        starColors[idx] = 0.75; starColors[idx + 1] = 0.88; starColors[idx + 2] = 1.0; // Xanh băng
+        starColors[idx] = 0.75; starColors[idx + 1] = 0.88; starColors[idx + 2] = 1.0; // Cool celestial blue
       } else {
-        starColors[idx] = 0.98; starColors[idx + 1] = 0.98; starColors[idx + 2] = 1.0; // Trắng sáng
+        starColors[idx] = 0.98; starColors[idx + 1] = 0.98; starColors[idx + 2] = 1.0; // Radiant white
       }
     }
 
@@ -92,7 +92,7 @@ export class ParticleSystem {
     });
     this.starsMesh = new THREE.Points(starGeometry, starMaterial);
 
-    // 2. Fireflies (Đom đóm bờ sông): Đốm sáng vàng dạ quang rõ nét, lung linh
+    // 2. Riverbank Fireflies: Bioluminescent glowing points
     const fireflyGeo = new THREE.BufferGeometry();
     this.fireflyPositions = new Float32Array(fireflyCount * 3);
     this.fireflyVelocities = new Float32Array(fireflyCount * 3);
@@ -102,10 +102,10 @@ export class ParticleSystem {
 
     for (let i = 0; i < fireflyCount; i++) {
       const idx = i * 3;
-      // Trải dài dọc sông từ xa đến gần tầm nhìn camera (Z: -45 đến +12, Camera ở Z=24)
-      this.fireflyPositions[idx] = (Math.random() - 0.5) * 50;     // X: Lòng sông & ven bờ
-      this.fireflyPositions[idx + 1] = 0.5 + Math.random() * 4.2;  // Y: Bay từ sát mặt nước lên tầm trung
-      this.fireflyPositions[idx + 2] = -45 + Math.random() * 57;   // Z: Chiều sâu dòng sông
+      // Distributed along the river within viewing range
+      this.fireflyPositions[idx] = (Math.random() - 0.5) * 50;
+      this.fireflyPositions[idx + 1] = 0.5 + Math.random() * 4.2;
+      this.fireflyPositions[idx + 2] = -45 + Math.random() * 57;
 
       this.fireflyVelocities[idx] = (Math.random() - 0.5) * 0.35;
       this.fireflyVelocities[idx + 1] = (Math.random() - 0.5) * 0.18;
@@ -113,7 +113,7 @@ export class ParticleSystem {
 
       this.fireflyPhases[i] = Math.random() * Math.PI * 2;
 
-      // Màu sắc đom đóm tự nhiên: Vàng chanh dạ quang pha hổ phách ấm
+      // Natural firefly coloration: warm chartreuse-gold
       const isWarm = Math.random() > 0.4;
       this.fireflyBaseColors[idx] = 1.0;
       this.fireflyBaseColors[idx + 1] = isWarm ? 0.92 : 0.98;
@@ -127,17 +127,16 @@ export class ParticleSystem {
     fireflyGeo.setAttribute('position', new THREE.BufferAttribute(this.fireflyPositions, 3));
     fireflyGeo.setAttribute('color', new THREE.BufferAttribute(fireflyColors, 3));
 
-    // Texture tròn rực rỡ với lõi vàng sáng đặc và quầng sáng mềm
     const fireflyTexture = createCircularGlowTexture(
-      'rgba(255, 255, 240, 1.0)', // Lõi trắng vàng chói sáng
-      'rgba(255, 220, 50, 0.95)', // Quầng vàng dạ quang ấm
-      'rgba(255, 160, 20, 0.45)', // Vầng tán sắc cam hổ phách
+      'rgba(255, 255, 240, 1.0)',
+      'rgba(255, 220, 50, 0.95)',
+      'rgba(255, 160, 20, 0.45)',
       128
     );
 
     const fireflyMaterial = new THREE.PointsMaterial({
       map: fireflyTexture,
-      size: 1.4, // Kích thước cân đối hoàn hảo: sáng rõ, lấp lánh như ngọc, không bị lấn át hoa đăng
+      size: 1.4,
       vertexColors: true,
       transparent: true,
       opacity: 1.0,
@@ -158,12 +157,12 @@ export class ParticleSystem {
     for (let i = 0; i < count; i++) {
       const idx = i * 3;
 
-      // Chuyển động lượn sóng tự nhiên bồng bềnh
+      // Organic brownian drift
       positions[idx] += velocities[idx] * dt + Math.sin(time * 0.8 + this.fireflyPhases[i]) * 0.02;
       positions[idx + 1] += velocities[idx + 1] * dt + Math.cos(time * 1.3 + this.fireflyPhases[i]) * 0.015;
       positions[idx + 2] += velocities[idx + 2] * dt + 0.05 * dt;
 
-      // Giới hạn biên độ an toàn, lượn quanh sông
+      // Boundary wraps around river view area
       if (positions[idx] > 26) positions[idx] = -26;
       if (positions[idx] < -26) positions[idx] = 26;
       if (positions[idx + 1] > 5.0) positions[idx + 1] = 0.6;
@@ -171,7 +170,7 @@ export class ParticleSystem {
       if (positions[idx + 2] > 14) positions[idx + 2] = -45;
       if (positions[idx + 2] < -48) positions[idx + 2] = 12;
 
-      // Từng con đom đóm nhấp nháy ĐỘC LẬP theo pha riêng (duy trì độ sáng cao 0.6 - 1.0)
+      // Independent asynchronous twinkle per particle
       const pulse = 0.65 + 0.35 * Math.sin(time * 2.8 + this.fireflyPhases[i]);
       colors[idx] = baseColors[idx] * pulse;
       colors[idx + 1] = baseColors[idx + 1] * pulse;
@@ -183,7 +182,6 @@ export class ParticleSystem {
   }
 
   public setQuality(tier: 'high' | 'medium' | 'low'): void {
-    // Đom đóm luôn hiển thị để giữ linh hồn đêm trăng, chỉ tinh chỉnh size
     this.firefliesMesh.visible = true;
     if (tier === 'low') {
       (this.starsMesh.material as THREE.PointsMaterial).size = 1.3;

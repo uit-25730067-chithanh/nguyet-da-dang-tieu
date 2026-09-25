@@ -1,5 +1,5 @@
 /**
- * Quản Lý Dữ Liệu Đèn & Lời Nguyện Ước (Lantern & Wish Store)
+ * Lantern & Wish Store - State Management
  */
 
 export interface LanternItem {
@@ -29,7 +29,7 @@ export class LanternStore {
     const defaultWishes: Array<{ author: string; message: string; type: 'lotus' | 'star' }> = [
       { author: 'Chị Hằng', message: 'Chúc các bạn nhỏ một mùa trăng rằm ngập tràn niềm vui và tiếng cười! 🌕', type: 'lotus' },
       { author: 'Chú Cuội', message: 'Ước cho mọi nhà luôn no ấm, đoàn viên và hạnh phúc sum vầy! 🥮', type: 'lotus' },
-      { author: 'Thỏ Ngọc', message: 'Chúc các kỹ sư tương lai của UIT code mượt mà, không bao giờ gặp bug! 💻', type: 'star' },
+      { author: 'Thỏ Ngọc', message: 'Chúc các kỹ sư và coder luôn code mượt mà, không bao giờ gặp bug! 💻', type: 'star' },
       { author: 'Học Muội', message: 'Nguyện cầu gia đình luôn mạnh khỏe, bình an và nhiều may mắn! 🏮', type: 'lotus' },
       { author: 'Một Người Bạn', message: 'Tết Trung Thu ấm áp bên người thân và bạn bè thân yêu! ✨', type: 'lotus' },
       { author: 'Ẩn Danh', message: 'Ước mơ bay cao như đèn ông sao soi sáng mọi chặng đường! ⭐', type: 'star' },

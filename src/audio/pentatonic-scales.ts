@@ -1,6 +1,6 @@
 /**
- * Thang Âm Ngũ Cung Việt Nam (Vietnamese Pentatonic Scale)
- * Hò (C), Xự (D), Xang (F), Xê (G), Cống (A)
+ * Vietnamese Pentatonic Scale (Thang Am Ngu Cung)
+ * Ho (C), Xu (D), Xang (F), Xe (G), Cong (A)
  */
 
 export interface PentatonicNote {
@@ -12,21 +12,21 @@ export interface PentatonicNote {
 
 // Exact standard 440Hz tuning frequencies
 export const PENTATONIC_SCALE: PentatonicNote[] = [
-  // Quãng 3: Trầm ấm, dùng làm bè đệm (Drone / Bass pad)
+  // Octave 3: Deep bass drone & ambient pad
   { name: 'C3', vietnameseName: 'Hò trầm', frequency: 130.81, octave: 3 },
   { name: 'D3', vietnameseName: 'Xự trầm', frequency: 146.83, octave: 3 },
   { name: 'F3', vietnameseName: 'Xang trầm', frequency: 174.61, octave: 3 },
   { name: 'G3', vietnameseName: 'Xê trầm', frequency: 196.0, octave: 3 },
   { name: 'A3', vietnameseName: 'Cống trầm', frequency: 220.0, octave: 3 },
 
-  // Quãng 4: Giai điệu sáo trúc & đàn tranh
+  // Octave 4: Main melody for bamboo flute & Dan Tranh zither
   { name: 'C4', vietnameseName: 'Hò', frequency: 261.63, octave: 4 },
   { name: 'D4', vietnameseName: 'Xự', frequency: 293.66, octave: 4 },
   { name: 'F4', vietnameseName: 'Xang', frequency: 349.23, octave: 4 },
   { name: 'G4', vietnameseName: 'Xê', frequency: 392.0, octave: 4 },
   { name: 'A4', vietnameseName: 'Cống', frequency: 440.0, octave: 4 },
 
-  // Quãng 5: Tiếng chuông gió & nốt gảy thanh tao
+  // Octave 5: Wind chimes & delicate crystalline plucks
   { name: 'C5', vietnameseName: 'Hò cao', frequency: 523.25, octave: 5 },
   { name: 'D5', vietnameseName: 'Xự cao', frequency: 587.33, octave: 5 },
   { name: 'F5', vietnameseName: 'Xang cao', frequency: 698.46, octave: 5 },
@@ -35,7 +35,7 @@ export const PENTATONIC_SCALE: PentatonicNote[] = [
 ];
 
 /**
- * Chọn ngẫu nhiên một nốt nhạc trong thang âm ngũ cung
+ * Pick a random note from the pentatonic scale
  */
 export function getRandomPentatonicNote(octaveFilter?: number): PentatonicNote {
   const pool = octaveFilter !== undefined
@@ -46,7 +46,7 @@ export function getRandomPentatonicNote(octaveFilter?: number): PentatonicNote {
 }
 
 /**
- * Tính toán nốt nhạc tương ứng theo vị trí X trên mặt sông (Screen/River position to pitch)
+ * Calculate pitch based on normalized horizontal position (Screen/River position to pitch)
  */
 export function getNoteFromPosition(normalizedX: number): PentatonicNote {
   // normalizedX between 0 (left) and 1 (right)

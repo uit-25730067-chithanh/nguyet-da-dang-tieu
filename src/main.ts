@@ -1,6 +1,6 @@
 /**
- * Nguyệt Dạ Đăng Tiêu — Lõi Khởi Động
- * Tết Trung Thu 2026 • uit-25730067-chithanh
+ * Nguyet Da Dang Tieu — Core Entrypoint
+ * Mid-Autumn Festival Interactive Sanctuary
  */
 
 import { SceneManager } from './graphics/scene-manager';
