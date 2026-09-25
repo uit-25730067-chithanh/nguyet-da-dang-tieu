@@ -72,16 +72,45 @@ export function createLotusLanternMesh(): THREE.Group {
   flameMesh.name = 'flame';
   group.add(flameMesh);
 
-  // 5. Warm candlelight glow aura
-  const glowGeo = new THREE.SphereGeometry(0.35, 8, 8);
-  const glowMat = new THREE.MeshBasicMaterial({
-    color: 0xff9900,
+// Shared radial glow texture for candle flames
+let sharedCandleAura: THREE.CanvasTexture | null = null;
+function getCandleAura(): THREE.CanvasTexture {
+  if (!sharedCandleAura) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      gradient.addColorStop(0.0, 'rgba(255, 255, 220, 1.0)');
+      gradient.addColorStop(0.25, 'rgba(255, 180, 50, 0.75)');
+      gradient.addColorStop(0.65, 'rgba(255, 100, 20, 0.2)');
+      gradient.addColorStop(1.0, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 64, 64);
+    }
+    sharedCandleAura = new THREE.CanvasTexture(canvas);
+    sharedCandleAura.needsUpdate = true;
+  }
+  return sharedCandleAura;
+}
+
+  // 5. Warm candlelight glow aura (Sprite tỏa vầng hào quang ấm áp)
+  const auraMat = new THREE.SpriteMaterial({
+    map: getCandleAura(),
+    color: 0xffaa44,
     transparent: true,
-    opacity: 0.4,
+    opacity: 0.9,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
   });
-  const glowMesh = new THREE.Mesh(glowGeo, glowMat);
-  glowMesh.position.y = 0.65;
-  group.add(glowMesh);
+  const auraSprite = new THREE.Sprite(auraMat);
+  auraSprite.scale.set(1.6, 1.6, 1.6);
+  auraSprite.position.y = 0.72;
+  group.add(auraSprite);
+
+  // Slightly enlarge lantern for crisp visibility from camera
+  group.scale.set(1.2, 1.2, 1.2);
 
   return group;
 }

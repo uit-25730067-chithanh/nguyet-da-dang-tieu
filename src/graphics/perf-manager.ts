@@ -48,12 +48,12 @@ export class PerfManager {
 
     const avgFps = this.fpsHistory.reduce((a, b) => a + b, 0) / this.fpsHistory.length;
 
-    if (avgFps < 28 && this.currentTier !== 'low') {
+    if (avgFps < 18 && this.currentTier !== 'low') {
       this.setTier('low');
-    } else if (avgFps >= 28 && avgFps < 48 && this.currentTier === 'high') {
+    } else if (avgFps >= 18 && avgFps < 45 && this.currentTier === 'high') {
       this.setTier('medium');
-    } else if (avgFps >= 55 && this.currentTier === 'low') {
-      this.setTier('medium');
+    } else if (avgFps >= 50 && this.currentTier !== 'high') {
+      this.setTier('high');
     }
   }
 

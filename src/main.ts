@@ -69,8 +69,9 @@ if (hasWebGL && webglCanvas) {
         synth?.playPluck(note.frequency, 0.45);
         wishUI?.showPopover(item, screenX, screenY);
       },
-      (worldX, worldZ) => {
-        wishUI?.openModal('lotus', { x: worldX, z: worldZ });
+      (worldX) => {
+        const note = getNoteFromPosition((worldX + 25) / 50);
+        synth?.playPluck(note.frequency, 0.3);
       }
     );
 

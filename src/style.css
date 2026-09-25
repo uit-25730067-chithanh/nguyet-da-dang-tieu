@@ -3,7 +3,7 @@
    ========================================================================== */
 :root {
   --font-main: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-title: 'Cinzel', serif;
+  --font-title: 'Playfair Display', 'Be Vietnam Pro', Georgia, serif;
 
   /* Color Palette: Đêm Trăng & Ánh Hoa Đăng */
   --color-bg-deep: #060814;
