@@ -1,0 +1,33 @@
+{
+  "name": "nguyet-da-dang-tieu",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Trải nghiệm 3D WebGL & Procedural Web Audio kỷ niệm Tết Trung Thu Việt Nam",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "mid-autumn",
+    "trung-thu",
+    "threejs",
+    "webgl",
+    "glsl",
+    "web-audio-api",
+    "pentatonic",
+    "vietnam"
+  ],
+  "author": "Chi Thanh (uit-25730067-chithanh)",
+  "license": "MIT",
+  "dependencies": {
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.170.0",
+    "typescript": "^5.6.0",
+    "vite": "^5.4.0",
+    "vitest": "^2.1.0"
+  }
+}

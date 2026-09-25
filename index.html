@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Nguyệt Dạ Đăng Tiêu 🌕 Đêm Rằm Trung Thu</title>
+    
+    <!-- SEO & Social Meta Tags -->
+    <meta name="description" content="Trải nghiệm không gian 3D WebGL và âm nhạc ngũ cung thuật toán nhân dịp Tết Trung Thu Việt Nam. Thả đèn hoa đăng, gửi gắm ước nguyện dưới ánh trăng rằm." />
+    <meta name="keywords" content="Trung Thu, Hoa Đăng, Đèn Ông Sao, Three.js, WebGL, Web Audio API, UIT, Pentatonic" />
+    <meta name="author" content="Chi Thanh (uit-25730067-chithanh)" />
+    <meta name="theme-color" content="#060814" />
+    
+    <meta property="og:title" content="Nguyệt Dạ Đăng Tiêu 🌕 Đêm Rằm Trung Thu" />
+    <meta property="og:description" content="Trải nghiệm không gian 3D WebGL và âm nhạc ngũ cung thuật toán dưới đêm trăng rằm Việt Nam." />
+    <meta property="og:type" content="website" />
+    
+    <!-- Google Fonts: Be Vietnam Pro & Cinzel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Cinzel:wght@600;800&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <!-- 3D WebGL Canvas Container -->
+    <div id="canvas-container">
+      <canvas id="webgl-canvas"></canvas>
+      <canvas id="fallback-canvas" class="hidden"></canvas>
+    </div>
+
+    <!-- Background Vignette & Atmosphere -->
+    <div class="vignette-overlay"></div>
+
+    <!-- Top Navigation Header -->
+    <header class="app-header glass-card">
+      <div class="brand">
+        <span class="moon-icon">🌕</span>
+        <div class="brand-text">
+          <h1 class="brand-title">Nguyệt Dạ Đăng Tiêu</h1>
+          <span class="brand-subtitle">Tết Trung Thu • Rằm Tháng Tám</span>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <div id="perf-badge" class="badge glass-pill" title="Tốc độ khung hình / Chế độ đồ họa">
+          <span class="pulse-dot"></span>
+          <span id="fps-counter">60 FPS</span>
+        </div>
+        <button id="btn-audio-toggle" class="btn-icon glass-pill" aria-label="Bật/Tắt âm nhạc ngũ cung" title="Bật/Tắt âm nhạc (Phím M)">
+          <span id="audio-icon">🔇</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Bottom Interactive Control Dock -->
+    <nav class="action-dock glass-card" role="toolbar" aria-label="Thanh công cụ thả đèn">
+      <button id="btn-open-wish" class="btn-primary" aria-label="Thả đèn hoa đăng ước nguyện">
+        <span class="btn-icon-symbol">🪷</span>
+        <span class="btn-label">Thả Hoa Đăng</span>
+      </button>
+
+      <button id="btn-launch-star" class="btn-secondary" aria-label="Thả đèn ông sao bay lên trời">
+        <span class="btn-icon-symbol">⭐</span>
+        <span class="btn-label">Thả Đèn Sao</span>
+      </button>
+      
+      <button id="btn-auto-lanterns" class="btn-tertiary" aria-label="Tự động thả muôn ánh hoa đăng">
+        <span class="btn-icon-symbol">✨</span>
+        <span class="btn-label">Vạn Hoa Đăng</span>
+      </button>
+    </nav>
+
+    <!-- Wish Input Modal -->
+    <div id="wish-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-content glass-card">
+        <button id="btn-close-modal" class="modal-close" aria-label="Đóng cửa sổ">✕</button>
+        <div class="modal-header">
+          <span class="modal-symbol">🪷</span>
+          <h2 id="modal-title">Gửi Ước Nguyện Đêm Rằm</h2>
+          <p class="modal-desc">Thắp lên ngọn nến hoa đăng mang theo tâm nguyện trôi bồng bềnh trên dòng sông ánh sáng.</p>
+        </div>
+
+        <form id="wish-form">
+          <div class="form-group">
+            <label for="wish-author">Người gửi (tùy chọn):</label>
+            <input type="text" id="wish-author" placeholder="Ví dụ: Thanh Đặng, Bạn nhỏ..." maxlength="30" />
+          </div>
+
+          <div class="form-group">
+            <label for="wish-message">Lời ước nguyện của bạn:</label>
+            <textarea id="wish-message" rows="3" placeholder="Nguyện cầu gia đình bình an, học tập tiến bộ, vạn sự hanh thông..." maxlength="120" required></textarea>
+            <div class="char-count"><span id="char-remaining">120</span> ký tự còn lại</div>
+          </div>
+
+          <div class="quick-wishes">
+            <span class="quick-label">Gợi ý nhanh:</span>
+            <div class="chips-container">
+              <button type="button" class="wish-chip">Gia đình bình an 🏮</button>
+              <button type="button" class="wish-chip">Học giỏi thi đỗ 🎓</button>
+              <button type="button" class="wish-chip">Code không bug 💻</button>
+              <button type="button" class="wish-chip">Đoàn viên hạnh phúc 🥮</button>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="submit" class="btn-primary full-width">
+              <span>Thắp Nến & Thả Đèn 🌕</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Wish Reader Floating Popover -->
+    <div id="wish-popover" class="wish-popover glass-card hidden" role="tooltip">
+      <div class="popover-candle">🕯️</div>
+      <div class="popover-body">
+        <h4 id="popover-author" class="popover-author">Người ẩn danh</h4>
+        <p id="popover-message" class="popover-text">Chúc mọi người một mùa Trung Thu ấm áp!</p>
+        <span class="popover-time">Vừa trôi qua</span>
+      </div>
+    </div>
+
+    <!-- Welcome / Autoplay Unlock Splash Overlay -->
+    <div id="splash-overlay" class="splash-screen">
+      <div class="splash-content glass-card">
+        <div class="splash-lanterns">
+          <span>🏮</span>
+          <span class="big-moon">🌕</span>
+          <span>🪷</span>
+        </div>
+        <h2 class="splash-title">Nguyệt Dạ Đăng Tiêu</h2>
+        <p class="splash-quote">
+          "Trăng sáng soi bóng dòng sông phẳng lặng,<br />
+          Gửi lời ước nguyện theo ánh hoa đăng."
+        </p>
+        <p class="splash-meta">UIT Open Source Project • Tết Trung Thu 2026</p>
+        <button id="btn-enter" class="btn-primary btn-glow">
+          <span>Bước Vào Đêm Rằm 🪷</span>
+        </button>
+      </div>
+    </div>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
